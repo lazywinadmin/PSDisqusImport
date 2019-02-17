@@ -1,6 +1,6 @@
 # PSDisqusImport
 
-Script to convert a Disqus Export to a PowerShell Object
+Script to convert a Disqus comments present in the Export generated on the Disqus website to a PowerShell Object.
 
 ## Description
 
@@ -15,6 +15,8 @@ This module will help me with that :-)
 
 Disqus Export can be found on the Disqus website under the admin portal: select "Community" and then "Export"
 A download link to a compressed GZ file will be send to your email.
+
+See: https://help.disqus.com/developer/comments-export
 
 ## Installation
 
@@ -37,4 +39,3 @@ Convert a Disqus export to a Json Object
 ```powershell
 .\PSDisqusImport.ps1 -Path MyDisqusExport.xml | ConvertTo-Json
 ```
-
