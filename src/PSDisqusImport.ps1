@@ -32,11 +32,11 @@ Initial Version
 
 <#
 .SYNOPSIS
-    Script to convert a Disqus export to a PowerShell Object
+    Script to convert a Disqus comments present in a export file generated on Disqus to a PowerShell Object
 
 .DESCRIPTION
     Note that the original format of the XML is not kept.
-    The script will combine the threads and comments (called post in the Export) into one object.
+    The script will combine the threads and comments (called "post" in the Export) into one PowerShell object.
 
     I moved my website to static pages hosted on GitHub Pages.
     The current Comment System used is hosted externally in Disqus.
@@ -78,7 +78,11 @@ Try
 
     Write-Verbose -Message "[$ScriptName] Retrieve Comments"
     $AllComments = $DisqusXML.post
+
+    Write-Verbose -Message "[$ScriptName] Retrieve Comments properties"
     $Properties = $AllComments | Get-Member -MemberType Property
+
+    Write-Verbose -Message "[$ScriptName] Starting process..."
     $AllComments | Foreach-Object -process {
         # Current Comment
         $Comment = $_
@@ -114,7 +118,6 @@ Try
                 $Post.Message = $Comment.message.'#cdata-section'
             }
             else{
-            
                 $Post.$prop = $Comment | Select-Object -ExpandProperty $prop |out-string
             }
         }
